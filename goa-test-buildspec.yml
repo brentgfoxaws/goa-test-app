@@ -16,6 +16,8 @@ phases:
   post_build:
     commands:
       - echo "Build process finished for $ENV_STAGE:$ENV_VERSION, uploading to S3"
+      - echo "Copying config file $ENV_CONFIG to config.json"
+      - cp $ENV_CONFIG dist/$APP_NAME/$ENV_CONFIG
       - cd dist/$APP_NAME
       - ls -la
       - aws s3 sync . s3://elverado-test --delete
