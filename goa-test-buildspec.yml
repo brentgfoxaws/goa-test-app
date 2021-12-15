@@ -2,21 +2,20 @@ version: 0.2
 env:
   variables:
     APP_NAME: "goa-test-app"
-    APP_BUCKET: "s3://elverado-test"
 phases:
   install:
     runtime-versions:
       nodejs: 14.x
     commands:
-      - echo install process started
+      - echo "Install process started..."
       - npm install && npm install -g @angular/cli
   build:
     commands:
-      - echo build process started now
+      - echo "Build process started..."
       - ng build --configuration=production
   post_build:
     commands:
-      - echo build process finished, we should uplload to S3 now
+      - echo "Build process finished, we should upload to S3 now"
       - cd dist/$APP_NAME
       - ls -la
       - aws s3 sync . s3://elverado-test --delete
