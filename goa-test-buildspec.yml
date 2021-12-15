@@ -7,7 +7,7 @@ phases:
     runtime-versions:
       nodejs: 14.x
     commands:
-      - echo "Install process started..."
+      - echo "Install process started for $ENV_EXAMPLEVAR..."
       - npm install && npm install -g @angular/cli
   build:
     commands:
@@ -15,7 +15,7 @@ phases:
       - ng build --configuration=production
   post_build:
     commands:
-      - echo "Build process finished, we should upload to S3 now"
+      - echo "Build process finished for $ENV_STAGE:$ENV_VERSION, uploading to S3"
       - cd dist/$APP_NAME
       - ls -la
       - aws s3 sync . s3://elverado-test --delete
