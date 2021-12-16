@@ -16,7 +16,7 @@ phases:
   post_build:
     commands:
       - echo "Build process finished for $ENV_STAGE:$ENV_VERSION, uploading to S3"
-      - echo "Copying config file $ENV_CONFIG to config.json"
+      - echo "Copying config file $ENV_CONFIG to dist/$APP_NAME/$ENV_CONFIG"
       - cp $ENV_CONFIG dist/$APP_NAME/$ENV_CONFIG
       - cd dist/$APP_NAME
       - ls -la
